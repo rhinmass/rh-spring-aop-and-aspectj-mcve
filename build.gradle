@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.8'
+    id 'io.spring.dependency-management' version '1.0.15.RELEASE'
+    id "io.freefair.aspectj.post-compile-weaving" version "6.6.1"
+}
+
+group = 'com.tutorial.basics.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '17'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation "org.aspectj:aspectjrt:1.9.8.RC3"
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+}
+
+compileJava.ajc.options.compilerArgs = ["-sourceroots", "../../../src/main/aspectj"]
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
